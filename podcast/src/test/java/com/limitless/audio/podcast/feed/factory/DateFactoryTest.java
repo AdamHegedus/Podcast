@@ -24,8 +24,8 @@ public class DateFactoryTest {
         calendar.set(2014, 11, 28, 20, 0, 0);
         final Date expected = calendar.getTime();
         // WHEN
-        final Date actual = underTest.getLastWeekdayOfMonth(2014, 11,
-                Calendar.SUNDAY);
+        final Date actual = underTest.getLastWeekdayOfMonth(2014,
+                Calendar.DECEMBER, Calendar.SUNDAY);
         // THEN
         Assert.assertEquals(expected, actual);
     }
@@ -38,8 +38,8 @@ public class DateFactoryTest {
         calendar.set(2014, 11, 29, 20, 0, 0);
         final Date expected = calendar.getTime();
         // WHEN
-        final Date actual = underTest.getLastWeekdayOfMonth(2014, 11,
-                Calendar.MONDAY);
+        final Date actual = underTest.getLastWeekdayOfMonth(2014,
+                Calendar.DECEMBER, Calendar.MONDAY);
         // THEN
         Assert.assertEquals(expected, actual);
     }
@@ -52,8 +52,8 @@ public class DateFactoryTest {
         calendar.set(2014, 11, 30, 20, 0, 0);
         final Date expected = calendar.getTime();
         // WHEN
-        final Date actual = underTest.getLastWeekdayOfMonth(2014, 11,
-                Calendar.TUESDAY);
+        final Date actual = underTest.getLastWeekdayOfMonth(2014,
+                Calendar.DECEMBER, Calendar.TUESDAY);
         // THEN
         Assert.assertEquals(expected, actual);
     }
@@ -66,8 +66,8 @@ public class DateFactoryTest {
         calendar.set(2014, 11, 31, 20, 0, 0);
         final Date expected = calendar.getTime();
         // WHEN
-        final Date actual = underTest.getLastWeekdayOfMonth(2014, 11,
-                Calendar.WEDNESDAY);
+        final Date actual = underTest.getLastWeekdayOfMonth(2014,
+                Calendar.DECEMBER, Calendar.WEDNESDAY);
         // THEN
         Assert.assertEquals(expected, actual);
     }
@@ -80,8 +80,8 @@ public class DateFactoryTest {
         calendar.set(2014, 11, 25, 20, 0, 0);
         final Date expected = calendar.getTime();
         // WHEN
-        final Date actual = underTest.getLastWeekdayOfMonth(2014, 11,
-                Calendar.THURSDAY);
+        final Date actual = underTest.getLastWeekdayOfMonth(2014,
+                Calendar.DECEMBER, Calendar.THURSDAY);
         // THEN
         Assert.assertEquals(expected, actual);
     }
@@ -94,8 +94,8 @@ public class DateFactoryTest {
         calendar.set(2014, 11, 26, 20, 0, 0);
         final Date expected = calendar.getTime();
         // WHEN
-        final Date actual = underTest.getLastWeekdayOfMonth(2014, 11,
-                Calendar.FRIDAY);
+        final Date actual = underTest.getLastWeekdayOfMonth(2014,
+                Calendar.DECEMBER, Calendar.FRIDAY);
         // THEN
         Assert.assertEquals(expected, actual);
     }
@@ -108,8 +108,8 @@ public class DateFactoryTest {
         calendar.set(2014, 11, 27, 20, 0, 0);
         final Date expected = calendar.getTime();
         // WHEN
-        final Date actual = underTest.getLastWeekdayOfMonth(2014, 11,
-                Calendar.SATURDAY);
+        final Date actual = underTest.getLastWeekdayOfMonth(2014,
+                Calendar.DECEMBER, Calendar.SATURDAY);
         // THEN
         Assert.assertEquals(expected, actual);
     }

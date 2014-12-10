@@ -4,7 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DateFormat {
+
+    private final Logger logger = LoggerFactory.getLogger(DateFormat.class);
 
     private final String RFC2822_DATEFORMAT = "EEE, dd MMM yyyy HH:mm:ss Z";
 
@@ -17,9 +22,11 @@ public class DateFormat {
         final String result;
         if (date == null) {
             result = "";
+            logger.info("The Date to be converted is NULL, returning empty String.");
         } else {
             result = new SimpleDateFormat(RFC2822_DATEFORMAT, Locale.US)
                     .format(date);
+            logger.info("The formatted Date is " + result);
         }
         return result;
     }
