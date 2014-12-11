@@ -1,4 +1,4 @@
-package com.limitless.audio.podcast.feed.factory;
+package com.limitless.audio.podcast.feed.xml.support;
 
 import com.limitless.audio.podcast.feed.xml.domain.EnclosureType;
 import com.limitless.audio.podcast.feed.xml.domain.ItemType;

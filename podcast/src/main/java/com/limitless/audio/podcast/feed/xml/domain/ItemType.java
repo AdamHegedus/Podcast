@@ -6,8 +6,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.limitless.audio.podcast.feed.factory.ItemTypeBuilder;
 import com.limitless.audio.podcast.feed.xml.marshal.AdapterCDATA;
+import com.limitless.audio.podcast.feed.xml.support.ItemTypeBuilder;
 
 /**
  * The item property is the main content of the podcast. The feed can has

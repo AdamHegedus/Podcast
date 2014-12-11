@@ -1,15 +1,15 @@
-package com.limitless.audio.podcast.file.mp3.domain;
+package com.limitless.audio.podcast.file.mp3.adapter;
 
 import com.mpatric.mp3agic.ID3v2;
 
-public class Id3 {
+public class Id3Adapter {
     private final ID3v2 id3;
 
     /**
      * Sets the ID3.
      * @param id3 the ID3 tag of the mp3
      */
-    public Id3(final ID3v2 id3) {
+    public Id3Adapter(final ID3v2 id3) {
         super();
         this.id3 = id3;
     }

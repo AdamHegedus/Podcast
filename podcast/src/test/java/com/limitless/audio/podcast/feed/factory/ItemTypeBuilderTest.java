@@ -6,10 +6,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.limitless.audio.podcast.feed.factory.ItemTypeBuilder;
 import com.limitless.audio.podcast.feed.xml.domain.EnclosureType;
 import com.limitless.audio.podcast.feed.xml.domain.ItemType;
 import com.limitless.audio.podcast.feed.xml.domain.ItunesImageType;
+import com.limitless.audio.podcast.feed.xml.support.ItemTypeBuilder;
 
 public class ItemTypeBuilderTest {
 
