@@ -26,7 +26,8 @@ public class DateFormat {
         } else {
             result = new SimpleDateFormat(RFC2822_DATEFORMAT, Locale.US)
                     .format(date);
-            logger.info("The formatted Date is " + result);
+            logger.info("The Date [" + date.toString() + "] is formatted as ["
+                    + result + "]");
         }
         return result;
     }

@@ -1,8 +1,13 @@
 package com.limitless.audio.podcast.file.mp3.domain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.limitless.audio.podcast.file.mp3.support.Mp3Builder;
 
 public class Mp3 {
+
+    private final Logger logger = LoggerFactory.getLogger(Mp3.class);
 
     private static final int TWO_CHARACTERS = 2;
     private static final int SECONDS_IN_HOUR = Integer.valueOf(3600);
@@ -23,13 +28,30 @@ public class Mp3 {
      */
     public Mp3(final Mp3Builder builder) {
         this.bitrate = builder.getBitrate();
+        logger.debug(this.getClass().getName()
+                + " constructor sets parameter bitrate as " + this.bitrate);
         this.samplerate = builder.getSamplerate();
+        logger.debug(this.getClass().getName()
+                + " constructor sets parameter samplerate as "
+                + this.samplerate);
         this.artist = builder.getArtist();
+        logger.debug(this.getClass().getName()
+                + " constructor sets parameter artist as " + this.artist);
         this.title = builder.getTitle();
+        logger.debug(this.getClass().getName()
+                + " constructor sets parameter title as " + this.title);
         this.album = builder.getAlbum();
+        logger.debug(this.getClass().getName()
+                + " constructor sets parameter album as " + this.album);
         this.track = builder.getTrack();
+        logger.debug(this.getClass().getName()
+                + " constructor sets parameter track as " + this.track);
         this.duration = builder.getDuration();
+        logger.debug(this.getClass().getName()
+                + " constructor sets parameter duration as " + this.duration);
         this.filesize = builder.getFilesize();
+        logger.debug(this.getClass().getName()
+                + " constructor sets parameter filesize as " + this.filesize);
     }
 
     /**
@@ -170,21 +192,40 @@ public class Mp3 {
 
         if (!isLessThanOneMinute()) {
             if (!isLessThanOneHour()) {
-                result.append(getDurationHours());
-                result.append(":");
-                result.append(addLeadingZeroIfLessThanTen(Integer
-                        .toString(getDurationMinutes())));
-                result.append(":");
+                processWhenDurationIsMoreThanOneHour(result);
             } else {
-                result.append(Integer.toString(getDurationMinutes()));
-                result.append(":");
+                processWhenDurationIsBetweenOneHourAndOneMinute(result);
             }
-            result.append(addLeadingZeroIfLessThanTen(Integer
-                    .toString(getDurationSeconds())));
         } else {
-            result.append(Integer.toString(getDurationSeconds()));
+            processWhenDurationIsLessThanOneMinute(result);
         }
+
+        logger.debug(this.getClass().getName() + " gets duration of "
+                + this.duration + " formatted to " + result.toString());
         return result.toString();
+    }
+
+    private void processWhenDurationIsBetweenOneHourAndOneMinute(
+            final StringBuilder result) {
+        result.append(Integer.toString(getDurationMinutes()));
+        result.append(":");
+        result.append(addLeadingZeroIfLessThanTen(Integer
+                .toString(getDurationSeconds())));
+    }
+
+    private void processWhenDurationIsMoreThanOneHour(final StringBuilder result) {
+        result.append(getDurationHours());
+        result.append(":");
+        result.append(addLeadingZeroIfLessThanTen(Integer
+                .toString(getDurationMinutes())));
+        result.append(":");
+        result.append(addLeadingZeroIfLessThanTen(Integer
+                .toString(getDurationSeconds())));
+    }
+
+    private void processWhenDurationIsLessThanOneMinute(
+            final StringBuilder result) {
+        result.append(Integer.toString(getDurationSeconds()));
     }
 
     private String addLeadingZeroIfLessThanTen(final String text) {
