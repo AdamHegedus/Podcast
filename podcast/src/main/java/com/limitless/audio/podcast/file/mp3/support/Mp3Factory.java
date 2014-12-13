@@ -12,7 +12,8 @@ public class Mp3Factory {
     private final Mp3Adapter adapter;
 
     /**
-     * @param adapter
+     * Sets the Mp3Adapter as an adapter to get mp3 data.
+     * @param adapter the Mp3Adapter to get data from
      */
     public Mp3Factory(final Mp3Adapter adapter) {
         super();
@@ -20,6 +21,7 @@ public class Mp3Factory {
     }
 
     /**
+     * Builds Mp3 object and return an instance of it.
      * @return Mp3
      */
     public Mp3 getMp3() {
