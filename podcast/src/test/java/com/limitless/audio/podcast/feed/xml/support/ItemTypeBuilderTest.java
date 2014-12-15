@@ -1,4 +1,4 @@
-package com.limitless.audio.podcast.feed.factory;
+package com.limitless.audio.podcast.feed.xml.support;
 
 import junit.framework.Assert;
 
@@ -9,7 +9,6 @@ import org.mockito.MockitoAnnotations;
 import com.limitless.audio.podcast.feed.xml.domain.EnclosureType;
 import com.limitless.audio.podcast.feed.xml.domain.ItemType;
 import com.limitless.audio.podcast.feed.xml.domain.ItunesImageType;
-import com.limitless.audio.podcast.feed.xml.support.ItemTypeBuilder;
 
 public class ItemTypeBuilderTest {
 

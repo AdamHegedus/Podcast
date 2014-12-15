@@ -4,7 +4,9 @@ import java.net.URI;
 
 import javax.ws.rs.core.UriBuilder;
 
+import com.limitless.audio.podcast.feed.xml.domain.EnclosureType;
 import com.limitless.audio.podcast.feed.xml.domain.ItemType;
+import com.limitless.audio.podcast.feed.xml.domain.ItunesImageType;
 import com.limitless.audio.podcast.file.mp3.domain.Mp3;
 
 public class ItemFactory {
@@ -29,27 +31,58 @@ public class ItemFactory {
      * @return ItemType
      */
     public ItemType getItem() {
+
         final ItemTypeBuilder builder = new ItemTypeBuilder();
-        builder.setAuthor(mp3.getArtist());
-        builder.setItunesAuthor(mp3.getArtist());
-        builder.setItunesDuration(mp3.getDurationFormatted());
-        builder.setTitle(mp3.getTitle());
-        final StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(mp3.getAlbum().toUpperCase());
-        stringBuilder.append(" ");
-        stringBuilder.append(mp3.getTrack());
-        stringBuilder.append(" ");
-        stringBuilder.append(mp3.getArtist());
-        stringBuilder.append(" - ");
-        stringBuilder.append(mp3.getTitle());
-        stringBuilder.append(".mp3");
-        final String link = uri(stringBuilder.toString());
+        final String artist = mp3.getArtist();
+        final String duration = mp3.getDurationFormatted();
+        final String title = mp3.getTitle();
+        final String album = mp3.getAlbum();
+        final String track = mp3.getTrack();
+        final long filesize = mp3.getFilesize();
+        final String link = buildLink(artist, title, album, track);
+        final String imageLink = buildImageLink(album, track);
+
+        builder.setAuthor(artist);
+        builder.setItunesAuthor(artist);
+        builder.setItunesDuration(duration);
+        builder.setTitle(title);
         builder.setGuid(link);
         builder.setLink(link);
+        builder.setEnclosure(new EnclosureType(link, filesize));
+        builder.setItunesImage(new ItunesImageType(imageLink));
 
         return builder.build();
     }
 
+    private String buildLink(final String artist, final String title,
+            final String album, final String track) {
+        final StringBuilder linkBuilder = new StringBuilder();
+        linkBuilder.append(album.toUpperCase());
+        linkBuilder.append(" ");
+        linkBuilder.append(track);
+        linkBuilder.append(" ");
+        linkBuilder.append(artist);
+        linkBuilder.append(" - ");
+        linkBuilder.append(title);
+        linkBuilder.append(".mp3");
+        return uri(linkBuilder.toString());
+    }
+
+    private String buildImageLink(final String album, final String track) {
+        final StringBuilder imageLinkBuilder = new StringBuilder();
+        imageLinkBuilder.append(album.toUpperCase());
+        imageLinkBuilder.append(" ");
+        imageLinkBuilder.append(track);
+        imageLinkBuilder.append(".jpg");
+
+        return uri(imageLinkBuilder.toString());
+    }
+
+    /**
+     * Encodes the given text to URL format.
+     * @param text the text to encode
+     * @return encoded URL
+     */
     public String uri(final String text) {
         final String result;
         final URI uri = UriBuilder.fromUri(baseUrl + text).build("");
