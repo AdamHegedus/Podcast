@@ -22,7 +22,6 @@ public class ChannelTypeBuilder {
     private String webMaster;
     private String lastBuildDate;
     private String category;
-    private String docs;
     private int ttl;
     private ImageType image;
     private String itunesAuthor;

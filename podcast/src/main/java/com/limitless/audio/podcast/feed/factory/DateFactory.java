@@ -7,6 +7,10 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Generates Date.
+ * @author Adam Hegedus
+ */
 public class DateFactory {
     private static final int RELEASE_SECOND = 0;
     private static final int RELEASE_MINUTE = 0;
@@ -42,11 +46,12 @@ public class DateFactory {
         return offset;
     }
 
-    private int correctOffset(int dayOffset) {
-        if (dayOffset >= 0) {
-            dayOffset += -DAYS_IN_WEEK;
+    private int correctOffset(final int dayOffset) {
+        int offset = dayOffset;
+        if (offset >= 0) {
+            offset += -DAYS_IN_WEEK;
         }
-        return dayOffset;
+        return offset;
     }
 
     private int getLastDayOffset(final Calendar calendar, final int weekday) {

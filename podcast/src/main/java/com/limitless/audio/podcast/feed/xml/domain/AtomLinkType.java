@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The atom:link element defines a relationship between a web resource and an
  * RSS channel or item (optional). The most common use is to identify an HTML
@@ -13,93 +16,89 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;atom:link href="website/rss.xml" rel="self" type="application/rss+xml" />
  * </pre>
- *
  * @author Adam Hegedus
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "atomLinkType")
 public class AtomLinkType {
-	@XmlAttribute(name = "href", required = true)
-	private String href;
-	@XmlAttribute(name = "rel", required = true)
-	private String rel;
-	@XmlAttribute(name = "type", required = true)
-	private String type;
 
-	/**
-	 * Used by JAXB marshaling operations.
-	 */
-	public AtomLinkType() {
-		super();
-	}
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	/**
-	 * Sets attributes to "self" and "application/rss+xml" by default.
-	 *
-	 * @param href
-	 *            is {@link String}, the xml file's URI
-	 */
-	public AtomLinkType(final String href) {
-		this.href = href;
-		this.rel = "self";
-		this.type = "application/rss+xml";
-	}
+    @XmlAttribute(name = "href", required = true)
+    private String href;
+    @XmlAttribute(name = "rel", required = true)
+    private String rel;
+    @XmlAttribute(name = "type", required = true)
+    private String type;
 
-	/**
-	 * Gets the URI of the links.
-	 *
-	 * @return the href
-	 */
-	public String getHref() {
-		return href;
-	}
+    /**
+     * Used by JAXB marshaling operations.
+     */
+    public AtomLinkType() {
+        super();
+    }
 
-	/**
-	 * Sets the URI of the links.
-	 *
-	 * @param href
-	 *            the URI of the links
-	 */
-	public void setHref(final String href) {
-		this.href = href;
-	}
+    /**
+     * Sets attributes to "self" and "application/rss+xml" by default.
+     * @param href is {@link String}, the xml file's URI
+     */
+    public AtomLinkType(final String href) {
+        this.href = href;
+        logger.debug(this.getClass().getName()
+                + " constructor sets href attribute to [" + this.href + "]");
+        this.rel = "self";
+        logger.debug(this.getClass().getName()
+                + " constructor sets rel attribute to [" + this.rel + "]");
+        this.type = "application/rss+xml";
+        logger.debug(this.getClass().getName()
+                + " constructor sets type attribute to [" + this.type + "]");
+    }
 
-	/**
-	 * Gets the relationship between the linked resource and the element.
-	 *
-	 * @return the relationship
-	 */
-	public String getRel() {
-		return rel;
-	}
+    /**
+     * Gets the URI of the links.
+     * @return the href
+     */
+    public String getHref() {
+        return href;
+    }
 
-	/**
-	 * Sets the relationship between the linked resource and the element.
-	 *
-	 * @param rel
-	 *            the relationship
-	 */
-	public void setRel(final String rel) {
-		this.rel = rel;
-	}
+    /**
+     * Sets the URI of the links.
+     * @param href the URI of the links
+     */
+    public void setHref(final String href) {
+        this.href = href;
+    }
 
-	/**
-	 * Gets the the resource's MIME media type.
-	 *
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
+    /**
+     * Gets the relationship between the linked resource and the element.
+     * @return the relationship
+     */
+    public String getRel() {
+        return rel;
+    }
 
-	/**
-	 * Sets the the resource's MIME media type.
-	 *
-	 * @param type
-	 *            the MIME type
-	 */
-	public void setType(final String type) {
-		this.type = type;
-	}
+    /**
+     * Sets the relationship between the linked resource and the element.
+     * @param rel the relationship
+     */
+    public void setRel(final String rel) {
+        this.rel = rel;
+    }
+
+    /**
+     * Gets the the resource's MIME media type.
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * Sets the the resource's MIME media type.
+     * @param type the MIME type
+     */
+    public void setType(final String type) {
+        this.type = type;
+    }
 }

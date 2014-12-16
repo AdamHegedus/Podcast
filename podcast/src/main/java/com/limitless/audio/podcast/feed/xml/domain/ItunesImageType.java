@@ -15,49 +15,44 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;itunes:image href="website/image.jpg" />
  * </pre>
- *
  * @author Adam Hegedus
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "itunesImageType", propOrder = { "href" })
+@XmlType(name = "itunesImageType", propOrder = {"href"})
 public class ItunesImageType {
-	@XmlAttribute(name = "href", required = true)
-	private String href;
+    @XmlAttribute(name = "href", required = true)
+    private String href;
 
-	/**
-	 * Used by JAXB marshaling operations.
-	 */
-	public ItunesImageType() {
-		super();
-	}
+    /**
+     * Used by JAXB marshaling operations.
+     */
+    public ItunesImageType() {
+        super();
+    }
 
-	/**
-	 * Sets the URI of the image.
-	 *
-	 * @param href
-	 */
-	public ItunesImageType(final String href) {
-		super();
-		this.href = href;
-	}
+    /**
+     * Sets the URI of the image.
+     * @param href
+     */
+    public ItunesImageType(final String href) {
+        super();
+        this.href = href;
+    }
 
-	/**
-	 * Gets the URI of the image.
-	 *
-	 * @return the href
-	 */
-	public String getHref() {
-		return href;
-	}
+    /**
+     * Gets the URI of the image.
+     * @return the href
+     */
+    public String getHref() {
+        return href;
+    }
 
-	/**
-	 * Sets the URI of the image.
-	 *
-	 * @param href
-	 *            the URI of the image
-	 */
-	public void setHref(final String href) {
-		this.href = href;
-	}
+    /**
+     * Sets the URI of the image.
+     * @param href the URI of the image
+     */
+    public void setHref(final String href) {
+        this.href = href;
+    }
 
 }

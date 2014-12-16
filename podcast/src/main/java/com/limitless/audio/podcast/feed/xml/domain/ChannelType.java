@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import com.limitless.audio.podcast.feed.xml.support.ChannelTypeBuilder;
 
 /**
+ * Declares the Channel in the podcast.
  * @author Adam Hegedus
  */
 @XmlAccessorType(XmlAccessType.FIELD)

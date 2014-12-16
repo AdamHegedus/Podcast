@@ -20,7 +20,7 @@ public class EnclosureType {
     @XmlAttribute(name = "length", required = true)
     private long length;
     /**
-     * The type values for supported file formats are as follows:
+     * The type values for supported file formats are as follows.
      *
      * <pre>
      * File Type

@@ -130,7 +130,7 @@ public class ItemTypeBuilder {
 
     /**
      * Sets the title.
-     * @param title
+     * @param title the title to set
      * @return this
      */
     public ItemTypeBuilder setTitle(final String title) {

@@ -8,7 +8,7 @@ import com.limitless.audio.podcast.file.mp3.domain.Mp3;
 
 public class Mp3Factory {
 
-    private final Logger logger = LoggerFactory.getLogger(Mp3Factory.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final Mp3Adapter adapter;
 
     /**
@@ -34,6 +34,7 @@ public class Mp3Factory {
         builder.setSamplerate(adapter.getSampleRate());
         builder.setDuration(adapter.getLengthInSeconds());
         builder.setFilesize(adapter.getFilesize());
+        logger.debug(this.getClass().getName() + " mp3 data built.");
         return builder.build();
     }
 }

@@ -9,9 +9,9 @@ public class Mp3 {
 
     private final Logger logger = LoggerFactory.getLogger(Mp3.class);
 
-    private static final int TWO_CHARACTERS = 2;
-    private static final int SECONDS_IN_HOUR = Integer.valueOf(3600);
-    private static final int MINUTES_IN_HOUR = Integer.valueOf(60);
+    private final static int TWO_CHARACTERS = 2;
+    private final static int SECONDS_IN_HOUR = Integer.valueOf(3600);
+    private final static int MINUTES_IN_HOUR = Integer.valueOf(60);
 
     private int bitrate;
     private int samplerate;

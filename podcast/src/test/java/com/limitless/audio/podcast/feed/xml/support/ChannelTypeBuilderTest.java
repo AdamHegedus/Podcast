@@ -9,6 +9,8 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.limitless.audio.podcast.feed.xml.domain.AtomLinkType;
 import com.limitless.audio.podcast.feed.xml.domain.ChannelType;
@@ -19,6 +21,8 @@ import com.limitless.audio.podcast.feed.xml.domain.ItunesImageType;
 import com.limitless.audio.podcast.feed.xml.domain.ItunesOwnerType;
 
 public class ChannelTypeBuilderTest {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Mock
     private AtomLinkType atom;
@@ -104,13 +108,15 @@ public class ChannelTypeBuilderTest {
         try {
             final Field docs = result.getClass().getDeclaredField("docs");
             docs.setAccessible(true);
-            Assert.assertEquals(docsExpected, docs);
+            Assert.assertEquals(docsExpected, docs.get(result));
         } catch (final NoSuchFieldException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error(this.getClass().getName() + " " + e.toString());
         } catch (final SecurityException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error(this.getClass().getName() + " " + e.toString());
+        } catch (final IllegalArgumentException e) {
+            logger.error(this.getClass().getName() + " " + e.toString());
+        } catch (final IllegalAccessException e) {
+            logger.error(this.getClass().getName() + " " + e.toString());
         }
 
         Assert.assertEquals(atom, result.getAtomLink());
@@ -118,6 +124,8 @@ public class ChannelTypeBuilderTest {
         Assert.assertEquals(itunesImage, result.getItunesImage());
         Assert.assertEquals(itunesCategory, result.getItunesCategory());
         Assert.assertEquals(itunesOwner, result.getItunesOwner());
+
+        Assert.assertEquals(items, result.getItem());
 
     }
 }

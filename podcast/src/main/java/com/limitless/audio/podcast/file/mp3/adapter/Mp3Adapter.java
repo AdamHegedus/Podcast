@@ -1,5 +1,6 @@
 package com.limitless.audio.podcast.file.mp3.adapter;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.slf4j.Logger;
@@ -35,12 +36,29 @@ public class Mp3Adapter {
     }
 
     /**
-     * Sets the mp3 file by its filename
+     * Sets the mp3 file by its filename.
      * @param filename the filename of the mp3 file
      */
     public void setMp3(final String filename) {
         try {
             this.mp3 = new Mp3File(filename);
+            this.id3 = mp3.getId3v2Tag();
+        } catch (final UnsupportedTagException e) {
+            logger.error(e.toString());
+        } catch (final InvalidDataException e) {
+            logger.error(e.toString());
+        } catch (final IOException e) {
+            logger.error(e.toString());
+        }
+    }
+
+    /**
+     * Sets the mp3 file by given file parameter.
+     * @param file the mp3 file
+     */
+    public void setMp3ByFile(final File file) {
+        try {
+            this.mp3 = new Mp3File(file);
             this.id3 = mp3.getId3v2Tag();
         } catch (final UnsupportedTagException e) {
             logger.error(e.toString());
