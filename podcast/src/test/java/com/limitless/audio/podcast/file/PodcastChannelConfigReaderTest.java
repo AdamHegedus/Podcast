@@ -19,7 +19,7 @@ public class PodcastChannelConfigReaderTest {
     @Test
     public void testTrimWhitespaces() {
         // GIVEN
-        final String base = "  valami szoveg \n\n \n  megtorve  \n \n \n   \n ";
+        final String base = "  valami szoveg \n\n \n  megtorve  \n \n \n   \n  ";
         final String expected = "valami szoveg\nmegtorve\n";
         // WHEN
         final String actual = underTest.trimWhitespaces(base);

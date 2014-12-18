@@ -40,7 +40,7 @@ public class ChannelTypeBuilderTest {
     private final ChannelTypeBuilder underTest = new ChannelTypeBuilder();
 
     @Test
-    public void testBuild() {
+    public void testBuild() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
         // GIVEN
         MockitoAnnotations.initMocks(this);
 
@@ -105,19 +105,9 @@ public class ChannelTypeBuilderTest {
         Assert.assertEquals(itunesSummary, result.getItunesSummary());
         Assert.assertEquals(itunesSubtitle, result.getItunesSubtitle());
 
-        try {
-            final Field docs = result.getClass().getDeclaredField("docs");
-            docs.setAccessible(true);
-            Assert.assertEquals(docsExpected, docs.get(result));
-        } catch (final NoSuchFieldException e) {
-            logger.error(this.getClass().getName() + " " + e.toString());
-        } catch (final SecurityException e) {
-            logger.error(this.getClass().getName() + " " + e.toString());
-        } catch (final IllegalArgumentException e) {
-            logger.error(this.getClass().getName() + " " + e.toString());
-        } catch (final IllegalAccessException e) {
-            logger.error(this.getClass().getName() + " " + e.toString());
-        }
+        final Field docs = result.getClass().getDeclaredField("docs");
+        docs.setAccessible(true);
+        Assert.assertEquals(docsExpected, docs.get(result));
 
         Assert.assertEquals(atom, result.getAtomLink());
         Assert.assertEquals(image, result.getImage());

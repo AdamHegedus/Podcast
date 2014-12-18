@@ -27,8 +27,7 @@ public class PodcastChannelConfigReader {
 
     public void openFile(final String filename) {
         file = new File(filename);
-        logger.info(this.getClass().getName() + " opening file [" + filename
-                + "]");
+        logger.info(this.getClass().getName() + " opening file [" + filename + "]");
     }
 
     public ChannelData scanFile() {
@@ -112,59 +111,48 @@ public class PodcastChannelConfigReader {
     }
 
     public ChannelData buildFromConfiguration(final Map<String, String> data) {
-        final ChannelData result;
         final ChannelDataBuilder builder = new ChannelDataBuilder();
         for (final Map.Entry<String, String> entry : data.entrySet()) {
-
             switch (entry.getKey()) {
             case "domain":
                 builder.setDomain(entry.getValue());
-                logger.debug(entry.getKey() + " : " + entry.getValue()
-                        + " set.");
+                logger.debug(entry.getKey() + " : " + entry.getValue() + " set.");
                 break;
             case "link":
                 builder.setLink(entry.getValue());
-                logger.debug(entry.getKey() + " : " + entry.getValue()
-                        + " set.");
+                logger.debug(entry.getKey() + " : " + entry.getValue() + " set.");
                 break;
             case "title":
                 builder.setTitle(entry.getValue());
-                logger.debug(entry.getKey() + " : " + entry.getValue()
-                        + " set.");
+                logger.debug(entry.getKey() + " : " + entry.getValue() + " set.");
                 break;
             case "managingEditor":
                 builder.setManagingEditor(entry.getValue());
-                logger.debug(entry.getKey() + " : " + entry.getValue()
-                        + " set.");
+                logger.debug(entry.getKey() + " : " + entry.getValue() + " set.");
                 break;
             case "webMaster":
                 builder.setWebMaster(entry.getValue());
-                logger.debug(entry.getKey() + " : " + entry.getValue()
-                        + " set.");
+                logger.debug(entry.getKey() + " : " + entry.getValue() + " set.");
                 break;
             case "language":
                 builder.setLanguage(entry.getValue());
-                logger.debug(entry.getKey() + " : " + entry.getValue()
-                        + " set.");
+                logger.debug(entry.getKey() + " : " + entry.getValue() + " set.");
                 break;
             case "category":
                 builder.setCategory(entry.getValue());
-                logger.debug(entry.getKey() + " : " + entry.getValue()
-                        + " set.");
+                logger.debug(entry.getKey() + " : " + entry.getValue() + " set.");
                 break;
             case "description":
                 builder.setDescription(entry.getValue());
-                logger.debug(entry.getKey() + " : " + entry.getValue()
-                        + " set.");
+                logger.debug(entry.getKey() + " : " + entry.getValue() + " set.");
                 break;
 
             default:
-                logger.debug(entry.getKey() + " : " + entry.getValue()
-                        + " skipped.");
+                logger.debug(entry.getKey() + " : " + entry.getValue() + " skipped.");
                 break;
             }
         }
-        result = builder.build();
-        return result;
+
+        return builder.build();
     }
 }

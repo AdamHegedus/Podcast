@@ -4,15 +4,15 @@ import com.limitless.audio.podcast.file.channel.support.ChannelDataBuilder;
 
 public class ChannelData {
     private final String domain;
-    private String title = "Podcast";
+    private final String title;
     private final String description;
     private final String link;
-    private String language = "en";
+    private final String language;
     private final String copyright;
     private final String managingEditor;
     private final String webMaster;
-    private String category = "Music";
-    private int ttl = 720;
+    private final String category;
+    private final int ttl;
 
     public ChannelData(final ChannelDataBuilder builder) {
         this.domain = builder.getDomain();
