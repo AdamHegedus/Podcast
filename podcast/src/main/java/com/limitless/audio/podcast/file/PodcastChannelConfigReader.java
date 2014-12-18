@@ -1,7 +1,9 @@
 package com.limitless.audio.podcast.file;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +13,9 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.limitless.audio.podcast.file.channel.domain.ChannelData;
+import com.limitless.audio.podcast.file.channel.support.ChannelDataBuilder;
+
 /**
  * Reads plain text file which contains the basic data of the podcast's channel.
  * @author Adam_Hegedus
@@ -19,7 +24,6 @@ public class PodcastChannelConfigReader {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private File file;
-    private final String regexp = "[=$]";
 
     public void openFile(final String filename) {
         file = new File(filename);
@@ -27,14 +31,32 @@ public class PodcastChannelConfigReader {
                 + "]");
     }
 
-    public void scanFile() {
-        try (final Scanner scanner = new Scanner(file)) {
+    public ChannelData scanFile() {
+        ChannelData result = null;
+        try (BufferedReader buffer = new BufferedReader(new FileReader(file));) {
+            final StringBuilder builder = new StringBuilder();
+            String line = buffer.readLine();
+
+            while (line != null) {
+                builder.append(line);
+                builder.append("\n");
+                line = buffer.readLine();
+            }
+            String data = builder.toString();
+            logger.debug(data);
+            data = trimWhitespaces(data);
+            logger.debug(data);
+            data = removeCommentLines(data);
+            logger.debug(data);
+            result = buildFromConfiguration(getConfiguration(data));
 
         } catch (final FileNotFoundException e) {
             e.printStackTrace();
         } catch (final IOException e) {
             e.printStackTrace();
         }
+
+        return result;
     }
 
     /**
@@ -45,7 +67,7 @@ public class PodcastChannelConfigReader {
     public String trimWhitespaces(final String text) {
         final StringBuilder result = new StringBuilder();
         try (Scanner scanner = new Scanner(text)) {
-            scanner.useDelimiter("\\n");
+            scanner.useDelimiter("\n");
             String line;
             while (scanner.hasNext()) {
                 line = scanner.next().trim();
@@ -78,13 +100,71 @@ public class PodcastChannelConfigReader {
         final Map<String, String> result = new HashMap<String, String>();
         try (Scanner scanner = new Scanner(text)) {
             scanner.useDelimiter(Pattern.compile("[=]|[\n]"));
-            while (scanner.hasNextLine()) {
-                final String token = scanner.next();
-                final String value = scanner.next();
+            while (scanner.hasNext()) {
+                final String token = scanner.next().trim();
+                final String value = scanner.next().trim();
                 result.put(token, value);
-                logger.debug("[" + token + "] = [" + value + "]");
+                logger.debug("[" + token + "] = [" + value + "] ");
             }
         }
+        logger.debug("parsing config finished");
+        return result;
+    }
+
+    public ChannelData buildFromConfiguration(final Map<String, String> data) {
+        final ChannelData result;
+        final ChannelDataBuilder builder = new ChannelDataBuilder();
+        for (final Map.Entry<String, String> entry : data.entrySet()) {
+
+            switch (entry.getKey()) {
+            case "domain":
+                builder.setDomain(entry.getValue());
+                logger.debug(entry.getKey() + " : " + entry.getValue()
+                        + " set.");
+                break;
+            case "link":
+                builder.setLink(entry.getValue());
+                logger.debug(entry.getKey() + " : " + entry.getValue()
+                        + " set.");
+                break;
+            case "title":
+                builder.setTitle(entry.getValue());
+                logger.debug(entry.getKey() + " : " + entry.getValue()
+                        + " set.");
+                break;
+            case "managingEditor":
+                builder.setManagingEditor(entry.getValue());
+                logger.debug(entry.getKey() + " : " + entry.getValue()
+                        + " set.");
+                break;
+            case "webMaster":
+                builder.setWebMaster(entry.getValue());
+                logger.debug(entry.getKey() + " : " + entry.getValue()
+                        + " set.");
+                break;
+            case "language":
+                builder.setLanguage(entry.getValue());
+                logger.debug(entry.getKey() + " : " + entry.getValue()
+                        + " set.");
+                break;
+            case "category":
+                builder.setCategory(entry.getValue());
+                logger.debug(entry.getKey() + " : " + entry.getValue()
+                        + " set.");
+                break;
+            case "description":
+                builder.setDescription(entry.getValue());
+                logger.debug(entry.getKey() + " : " + entry.getValue()
+                        + " set.");
+                break;
+
+            default:
+                logger.debug(entry.getKey() + " : " + entry.getValue()
+                        + " skipped.");
+                break;
+            }
+        }
+        result = builder.build();
         return result;
     }
 }
