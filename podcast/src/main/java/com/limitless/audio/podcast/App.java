@@ -9,6 +9,6 @@ public class App {
     public static void main(final String[] args) {
         final PodcastChannelConfigReader reader = new PodcastChannelConfigReader();
         reader.openFile("d:/podcast.txt");
-        reader.scanFile();
+        reader.scanFile(reader.getBuffer());
     }
 }

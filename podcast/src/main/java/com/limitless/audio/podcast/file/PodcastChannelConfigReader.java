@@ -30,30 +30,42 @@ public class PodcastChannelConfigReader {
         logger.info(this.getClass().getName() + " opening file [" + filename + "]");
     }
 
-    public ChannelData scanFile() {
-        ChannelData result = null;
-        try (BufferedReader buffer = new BufferedReader(new FileReader(file));) {
-            final StringBuilder builder = new StringBuilder();
-            String line = buffer.readLine();
+    public BufferedReader getBuffer() {
+        BufferedReader buffer = null;
+        try {
+            buffer = new BufferedReader(new FileReader(file));
+            logger.info(buffer.getClass().getName() + " created.");
+        } catch (final FileNotFoundException e) {
+            logger.error(e.toString());
+        }
 
+        return buffer;
+    }
+
+    public ChannelData scanFile(final BufferedReader buffer) {
+        ChannelData result = null;
+
+        final StringBuilder builder = new StringBuilder();
+        String line;
+        try {
+            line = buffer.readLine();
+            logger.debug(line);
             while (line != null) {
                 builder.append(line);
                 builder.append("\n");
                 line = buffer.readLine();
             }
-            String data = builder.toString();
-            logger.debug(data);
-            data = trimWhitespaces(data);
-            logger.debug(data);
-            data = removeCommentLines(data);
-            logger.debug(data);
-            result = buildFromConfiguration(getConfiguration(data));
-
-        } catch (final FileNotFoundException e) {
-            e.printStackTrace();
+            buffer.close();
         } catch (final IOException e) {
-            e.printStackTrace();
+            logger.error(e.toString());
         }
+        String data = builder.toString();
+        logger.debug(data);
+        data = trimWhitespaces(data);
+        logger.debug(data);
+        data = removeCommentLines(data);
+        logger.debug(data);
+        result = buildFromConfiguration(getConfiguration(data));
 
         return result;
     }
